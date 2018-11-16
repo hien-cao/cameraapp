@@ -3,6 +3,6 @@
 {% block body %}
   <div class="container">
     <h1>Dashboard <small>Welcome {{session.username}}</small></h1>
-    <img src="{{ url_for('video_feed') }}">
+    <img class="w-50 rounded" src="{{ url_for('video_feed') }}">
   </div>
 {% endblock %}

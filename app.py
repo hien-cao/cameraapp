@@ -4,15 +4,8 @@ from functools import wraps
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import pbkdf2_sha256
 
-#!/usr/bin/env python
-from importlib import import_module
-import os
-
-# import camera driver
-if os.environ.get('CAMERA'):
-    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
-else:
-    from camera import Camera
+# Import camera module (require install camera package )
+from camera_pi import Camera
 
 app = Flask(__name__)
 
