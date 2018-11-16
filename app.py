@@ -1,8 +1,11 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
+from flask import Flask, render_template, flash, redirect, url_for, session, request, logging, Response
 from flaskext.mysql import MySQL
 from functools import wraps 
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import pbkdf2_sha256
+
+# emulated camera
+from camera import Camera
 
 app = Flask(__name__)
 
