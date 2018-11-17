@@ -168,7 +168,7 @@ def video_feed():
 
 if __name__ == '__main__':
   try:
-    staticLine = "Hello!"
+    staticLine = [ 'Hello!','', ]
     scrollLine = "Warchest"
     main()
     app.secret_key = 'secret123'
