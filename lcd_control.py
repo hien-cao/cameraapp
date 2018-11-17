@@ -1,6 +1,6 @@
 import time
-from RPLCD import CharLCD
-lcd = CharLCD()
+from RPLCD.i2c import CharLCD
+lcd = CharLCD('PCF8574', 0x27)
 
 def write_to_lcd(lcd, framebuffer, num_cols):
   """Write the framebuffer out to the specified LCD."""
