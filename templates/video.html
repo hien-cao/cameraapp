@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="live-stream">
+      <h1 class="display-5">Live Video</h1>
+      <img class="w-50 rounded mx-auto d-block" src="{{ url_for('video_feed') }}">
+    </div>
+    <div class="message">
+      <form method="POST">
+        <div class="form-group">
+          <label>Message<small>(Type the message displayed on LCD)</small></label>
+          <input type="text" name="username" class="form-control" value="{{request.form.message}}">
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Send</button>
+      </form>
+    </div>
+    <div class="led-buzzer">
+      {% for pin in pins %}
+      <h2>{{ pins[pin].name }}
+        {% if pins[pin].state == true %}
+        is currently <strong>on</strong></h2>
+      <div class="row">
+        <div class="col-md-2">
+          <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div>
+      </div>
+      {% else %}
+      is currently <strong>off</strong></h2>
+      <div class="row">
+        <div class="col-md-2">
+          <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

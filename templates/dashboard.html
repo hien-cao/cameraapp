@@ -1,8 +1,0 @@
-{% extends 'layout.html' %}
-
-{% block body %}
-  <div class="container">
-    <h1>Dashboard <small>Welcome {{session.username}}</small></h1>
-    <img class="w-50 rounded" src="{{ url_for('video_feed') }}">
-  </div>
-{% endblock %}
