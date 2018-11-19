@@ -165,9 +165,13 @@ def logout():
 @is_logged_in
 def video():
   if request.method == 'POST':
-    staticLine = [session['username'], '',]
-    message = request.form['message']
-    display_message(message, staticLine)
+    # staticLine = [session['username'], '',]
+    # message = request.form['message']
+    # display_message(message, staticLine)
+    firstline = request.form['firstline']
+    secondline = request.form['secondline']
+    lcd_string(firstline, LCD_LINE_1)
+    lcd_string(secondline, LCD_LINE_2)
   
   # For each pin, read the pin state and store it in the pins dictionary:
   for pin in pins:
@@ -224,8 +228,8 @@ def video_feed():
 if __name__ == '__main__':
   try:
     lcd_init()
-    lcd_string('THE SYSTEM', LCD_LINE1)
-    lcd_string('IS WORKING!', LCD_LINE2)
+    lcd_string('THE SYSTEM', LCD_LINE_1)
+    lcd_string('IS WORKING!', LCD_LINE_2)
     app.secret_key = 'secret123'
     #app.run(host='0.0.0.0', port =80, debug=True, threaded=True)
     app.run(host='0.0.0.0', debug=True)
