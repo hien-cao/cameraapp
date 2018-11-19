@@ -17,8 +17,8 @@ from camera_pi import Camera
 # Import i2c lcd module 
 # Following tutorial of osoyoo.com
 # http://osoyoo.com/2016/06/01/drive-i2c-lcd-screen-with-raspberry-pi/
-#from i2clcd import lcd_init()
-from lcd_control import *
+from i2clcd import *
+#from lcd_control import *
 
 # Import Raspberry GPIO controller (Pyry)
 import RPi.GPIO as GPIO
@@ -179,7 +179,7 @@ def video():
   # Pass the template data into the template main.html and return it to the user
   return render_template('video.html', **templateData)
 
-@app.route("video/<changePin>/<action>")
+@app.route("/video/<changePin>/<action>")
 def led(changePin, action):
   # Control LED and BUZZER
   # Convert the pin from the URL into an integer:
@@ -204,7 +204,7 @@ def led(changePin, action):
   templateData = {
     'pins' : pins
   }
-  return render_template('video.html', **template)
+  return render_template('video.html', **templateData)
 
 # Camera setup
 def gen(camera):
@@ -223,9 +223,12 @@ def video_feed():
 
 if __name__ == '__main__':
   try:
+    lcd_init()
+    lcd_string('THE SYSTEM', LCD_LINE1)
+    lcd_string('IS WORKING!', LCD_LINE2)
     app.secret_key = 'secret123'
     #app.run(host='0.0.0.0', port =80, debug=True, threaded=True)
     app.run(host='0.0.0.0', debug=True)
-    display_message(['The app is running', '',], 'Welcome to surveillence system 4000', 15)
+    #display_message(['The app is running', '',], 'Welcome to surveillence system 4000', 15)
   except KeyboardInterrupt:
     pass

@@ -4,17 +4,31 @@
   <div class="container">
     <div class="live-stream">
       <h1 class="display-5">Live Video</h1>
-      <img class="w-50 rounded mx-auto d-block" src="{{ url_for('video_feed') }}">
+      <img class="w-75 rounded mx-auto d-block" src="{{ url_for('video_feed') }}">
     </div>
+    <hr>
     <div class="message">
-      <form method="POST">
+      <!-- <form method="POST">
         <div class="form-group">
           <label>Message<small>(Type the message displayed on LCD)</small></label>
           <input type="text" name="username" class="form-control" value="{{request.form.message}}">
         </div>
         <button type="submit" class="btn btn-outline-primary">Send</button>
+      </form> -->
+      <form action="" method="POST">
+        <div class="form-group">
+          <label>Message printed in firstline in LCD (max 16 chars)</label>
+          <input type="text" name="firstline" value="{{request.form.firstline}}">
+        </div>
+        <div class="form-group">
+          <label>Message printed in secondline in LCD (max 16 chars)</label>
+          <input type="text" name="secondline" value="{{request.form.secondline}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
       </form>
+      <p>Send empty line to turn of LCD</p>
     </div>
+    <hr>
     <div class="led-buzzer">
       {% for pin in pins %}
       <h2>{{ pins[pin].name }}
@@ -22,13 +36,13 @@
         is currently <strong>on</strong></h2>
       <div class="row">
         <div class="col-md-2">
-          <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div>
+          <a href="/video/{{pin}}/off" class="btn btn-danger" role="button">Turn off</a></div>
       </div>
       {% else %}
       is currently <strong>off</strong></h2>
       <div class="row">
         <div class="col-md-2">
-          <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div>
+          <a href="/video/{{pin}}/on" class="btn btn-primary" role="button">Turn on</a></div>
       </div>
       {% endif %}
       {% endfor %}
