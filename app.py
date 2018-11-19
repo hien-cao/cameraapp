@@ -55,14 +55,6 @@ mysql.init_app(app)
 @app.route('/')
 @app.route('/home')
 def home():
-  # For each pin, read the pin state and store it in the pins dictionary:
-  for pin in pins:
-    pins[pin]['state'] = GPIO.input(pin)
-  # Put the pin dictionary into the template data dictionary:
-  templateData = {
-    'pins' : pins
-    }
-  # Pass the template data into the template main.html and return it to the user
   return render_template('home.html')
 
 # About
@@ -169,14 +161,26 @@ def logout():
   return redirect(url_for('login'))
 
 # Video
-@app.route('/video')
+@app.route('/video', methods = ['GET', 'POST'])
 @is_logged_in
-def video(changePin, action):
+def video():
   if request.method == 'POST':
     staticLine = [session['username'], '',]
     message = request.form['message']
     display_message(message, staticLine)
   
+  # For each pin, read the pin state and store it in the pins dictionary:
+  for pin in pins:
+    pins[pin]['state'] = GPIO.input(pin)
+  # Put the pin dictionary into the template data dictionary:
+  templateData = {
+    'pins' : pins
+    }
+  # Pass the template data into the template main.html and return it to the user
+  return render_template('video.html', **templateData)
+
+@app.route("video/<changePin>/<action>")
+def led(changePin, action):
   # Control LED and BUZZER
   # Convert the pin from the URL into an integer:
   changePin = int(changePin)
@@ -200,7 +204,7 @@ def video(changePin, action):
   templateData = {
     'pins' : pins
   }
-  return render_template('video.html', **templateData)
+  return render_template('video.html', **template)
 
 # Camera setup
 def gen(camera):
