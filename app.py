@@ -183,8 +183,21 @@ def video():
   # Pass the template data into the template main.html and return it to the user
   return render_template('video.html', **templateData)
 
-@app.route("/video/<changePin>/<action>")
-def led(changePin, action):
+@app.route('/buzzer')
+def led():
+  # For each pin, read the pin state and store it in the pins dictionary:
+  for pin in pins:
+    pins[pin]['state'] = GPIO.input(pin)
+  # Put the pin dictionary into the template data dictionary:
+  templateData = {
+    'pins' : pins
+    }
+  # Pass the template data into the template main.html and return it to the user
+  return render_template('buzzer.html')
+
+
+@app.route("/buzzer/<changePin>/<action>")
+def buzzer(changePin, action):
   # Control LED and BUZZER
   # Convert the pin from the URL into an integer:
   changePin = int(changePin)
@@ -208,7 +221,7 @@ def led(changePin, action):
   templateData = {
     'pins' : pins
   }
-  return render_template('video.html', **templateData)
+  return render_template('buzzer.html', **templateData)
 
 # Camera setup
 def gen(camera):

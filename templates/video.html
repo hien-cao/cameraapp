@@ -8,13 +8,6 @@
     </div>
     <hr>
     <div class="message">
-      <!-- <form method="POST">
-        <div class="form-group">
-          <label>Message<small>(Type the message displayed on LCD)</small></label>
-          <input type="text" name="username" class="form-control" value="{{request.form.message}}">
-        </div>
-        <button type="submit" class="btn btn-outline-primary">Send</button>
-      </form> -->
       <form action="" method="POST">
         <div class="form-group">
           <label>Message printed in firstline in LCD (max 16 chars)</label>
@@ -27,25 +20,6 @@
         <button type="submit" class="btn btn-primary">Send</button>
       </form>
       <p>Send empty line to turn of LCD</p>
-    </div>
-    <hr>
-    <div class="led-buzzer">
-      {% for pin in pins %}
-      <h2>{{ pins[pin].name }}
-        {% if pins[pin].state == true %}
-        is currently <strong>on</strong></h2>
-      <div class="row">
-        <div class="col-md-2">
-          <a href="/video/{{pin}}/off" class="btn btn-danger" role="button">Turn off</a></div>
-      </div>
-      {% else %}
-      is currently <strong>off</strong></h2>
-      <div class="row">
-        <div class="col-md-2">
-          <a href="/video/{{pin}}/on" class="btn btn-primary" role="button">Turn on</a></div>
-      </div>
-      {% endif %}
-      {% endfor %}
     </div>
   </div>
 {% endblock %}
