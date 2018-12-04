@@ -193,7 +193,7 @@ def led():
     'pins' : pins
     }
   # Pass the template data into the template main.html and return it to the user
-  return render_template('buzzer.html')
+  return render_template('buzzer.html', **templateData)
 
 
 @app.route("/buzzer/<changePin>/<action>")
@@ -245,7 +245,7 @@ if __name__ == '__main__':
     lcd_string('IS WORKING!', LCD_LINE_2)
     app.secret_key = 'secret123'
     #app.run(host='0.0.0.0', port =80, debug=True, threaded=True)
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')
     #display_message(['The app is running', '',], 'Welcome to surveillence system 4000', 15)
   except KeyboardInterrupt:
     pass
